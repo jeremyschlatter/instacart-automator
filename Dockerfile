@@ -12,6 +12,6 @@ RUN gem install rdoc selenium-webdriver watir watir-webdriver pry
 #RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q firefox xvfb
 
-ENTRYPOINT ["bash"]
+ENTRYPOINT ["/src/instacart-automator/run"]
 
 ADD . /src/instacart-automator
