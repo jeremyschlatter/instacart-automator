@@ -1,3 +1,2 @@
-#!/bin/zsh
-
-ruby automate.rb
+Xvfb :10 -ac &
+DISPLAY=:10 ruby automate.rb
