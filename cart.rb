@@ -4,27 +4,23 @@ class Cart < AttributeInitializable
   end
 
   def self.place_order
-    # Click "Place Order"
-    #@@browser.goto("#{TARGET_URL_PREFIX}/store#checkout")
-    @@browser.element(:xpath, "//a[@href='#checkout']").click
+    @@browser.div(:id => "cart-in-nav").click
+    @@browser.a(:class => "btn-checkout").click
 
-    # Select first credit card
-    puts "Selecting first credit card..."
-    select_index_in_select_list("credit_card_id", 1)
-
-    # Select first address
-    puts "Selecting first address..."
-    select_index_in_select_list("address_id", 1)
-
-    # Set policy to "Shoppers Choice"
-    puts "Setting policy to 'Shoppers Choice'..."
-    @@browser.element(:xpath, "//input[@id='order_replacement_policy_shoppers_choice']").click
-
-    # Wait for the delivery timeframe options to show up
     sleep 1
 
-    # Select the "Immediate" option
-    puts "Selecting 'Immediate' delivery timeframe option..."
-    select_first_non_empty_value_in_select_list "delivery_option_1"
+    # Deliver between 6 and 7 pm.
+    #@@browser.select_list(:id, "delivery_option_1").select_value("6-7pm")
+
+    # Submit order.
+    puts @@browser.url, @@browser.title
+    @@browser.button(:value, /Next/).click
+    sleep 2
+    puts @@browser.url, @@browser.title
+    @@browser.element(:data_tip_amount, '2').click
+    puts @@browser.url, @@browser.title
+    @@browser.button(:value, /Next/).click
+    puts @@browser.url, @@browser.title
+    @@browser.button(:value, /Place Order/).click
   end
 end
