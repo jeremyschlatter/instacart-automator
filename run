@@ -3,5 +3,4 @@
 # This script is intended to be run in the Docker image.
 
 cd /src/instacart-automator
-Xvfb :10 -ac &
-DISPLAY=:10 ruby automate.rb
+DISPLAY=:10 ruby automate.rb $@

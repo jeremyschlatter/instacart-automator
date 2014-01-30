@@ -12,6 +12,9 @@ RUN gem install rdoc selenium-webdriver watir watir-webdriver pry
 #RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q firefox xvfb
 
+# Some more gems. Adding at the end to take advantage of cache.
+RUN gem install trollop headless
+
 ENTRYPOINT ["/src/instacart-automator/run"]
 
 ADD . /src/instacart-automator

@@ -16,8 +16,8 @@ opts = Trollop::options do
     opt :order_b, "Put Order B in cart"
     opt :checkout, "Checkout at the end"
     opt :clear_cart, "Clear cart first"
-    opt :user, "Instacart username"
-    opt :password, "Instacart password"
+    opt :user, "Instacart username", :type => :string
+    opt :password, "Instacart password", :type => :string
 end
 
 if opts[:order_a]
