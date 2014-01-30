@@ -68,17 +68,16 @@ if opts[:clear_cart]
     Cart.clear
 end
 
-# Add items
-puts "Adding items..."
-
-Item.add_items
+if !Item.items.empty?
+    # Add items
+    puts "Adding items..."
+    Item.add_items
+end
 
 if opts[:checkout]
     puts "Placing order..."
     Cart.place_order
 end
-
-sleep 5
 
 # Quit
 puts "Quitting browser..."
