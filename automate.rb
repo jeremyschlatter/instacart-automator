@@ -22,9 +22,8 @@ end
 
 if opts[:order_a]
     Item.define 39175, 3 # Barnstar Cage Free Eggs
-    Item.define 39654, 1 # The Greek Gods Traditional Plain Greek Yogurt
     Item.define 42639, 2 # Organic Yellow Onions
-    Item.define 39293, 1 # Lucerne Milk Whole
+    Item.define 39291, 1 # Horizon Organic Vitamin D Whole Milk
     Item.define 42557, 3 # Organic Banana
     Item.define 42899, 1 # Turtle Island Tofurky Italian Sausage
     Item.define 37686, 1 # Ghirardelli Chocolate Gourmet Bar Intense Dark Chocolate Midnight Reverie 86% Cacao
