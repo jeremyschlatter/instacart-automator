@@ -1,20 +1,27 @@
-FROM ubuntu:12.10
+FROM debian:jessie
 
-RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
+    ruby-dev \
+    build-essential \
+    iceweasel \
+    libffi-dev \
+    xvfb
 
-# Ruby and gems
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q ruby-dev build-essential
-RUN gem install rdoc selenium-webdriver watir watir-webdriver pry
+RUN gem install \
+    rdoc \
+    ffi \
+    selenium-webdriver \
+    watir \
+    pry \
+    trollop \
+    headless
 
-# Firefox and Xvfb
-#RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q software-properties-common
-#RUN apt-add-repository ppa:mozillateam/firefox-stable
-#RUN apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q firefox xvfb
+WORKDIR /src/instacart-automator
 
-# Some more gems. Adding at the end to take advantage of cache.
-RUN gem install trollop headless
+ENV DISPLAY :10
 
-ENTRYPOINT ["/src/instacart-automator/run"]
+ENTRYPOINT ["ruby", "automate.rb"]
+
+CMD ["--help"]
 
 ADD . /src/instacart-automator
