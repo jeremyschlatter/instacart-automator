@@ -5,6 +5,7 @@ require 'watir-webdriver'
 require 'pry'
 require 'trollop'
 require 'headless'
+require 'yaml'
 
 load 'utility.rb'
 load 'attribute_initializable.rb'
@@ -12,32 +13,21 @@ load 'cart.rb'
 load 'item.rb'
 
 opts = Trollop::options do
-    opt :order_a, "Put Order A in cart"
-    opt :order_b, "Put Order B in cart"
     opt :checkout, "Checkout at the end"
     opt :clear_cart, "Clear cart first"
-    opt :user, "Instacart username", :type => :string
-    opt :password, "Instacart password", :type => :string
+    opt :user, "Instacart username", :type => :string, :required => true
+    opt :password, "Instacart password", :type => :string, :required => true
 end
 
-if opts[:order_a]
-    Item.define 39175, 3 # Barnstar Cage Free Eggs
-    Item.define 42639, 2 # Organic Yellow Onions
-    Item.define 39291, 1 # Horizon Organic Vitamin D Whole Milk
-    Item.define 42557, 3 # Organic Banana
-    Item.define 42899, 1 # Turtle Island Tofurky Italian Sausage
-    Item.define 37686, 1 # Ghirardelli Chocolate Gourmet Bar Intense Dark Chocolate Midnight Reverie 86% Cacao
-    Item.define 213639, 1 # Trail Blazer Blueberries
-elsif opts[:order_b]
-    Item.define 107917, 3 # eggs
-    Item.define 108069, 1 # milk
-    Item.define 97742, 1 # ice cream
-    Item.define 97904, 1 # juice
-    Item.define 109272, 1 # humus
-    Item.define 106647, 1 # chips
-    Item.define 100202, 1 # shredded cheese
-    Item.define 106901, 1 # raspberries
-    Item.define 219576, 1.25 # oranges
+data = YAML::load(STDIN.read)
+data.each do |hash|
+    hash.each do |k, v|
+        Item.define k, v
+    end
+end
+
+if Item.items.empty? && !opts[:checkout] && !opts[:clear_cart]
+    puts "Nothing to do, quitting."
 end
 
 TARGET_URL_PREFIX="http://instacart.com"
