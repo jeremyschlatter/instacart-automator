@@ -48,18 +48,18 @@ headless.start
 
 # Initialize browser
 puts "Initializing browser..."
-@@browser = Watir::Browser.new
+$browser = Watir::Browser.new
 
 # Fetch Login page..."
 puts "Fetching Login page..."
-@@browser.goto "#{TARGET_URL_PREFIX}/accounts/login"
+$browser.goto "#{TARGET_URL_PREFIX}/accounts/login"
 
 # Fill in the Login form
 puts "Filling in Login form..."
-@@browser.text_field(:name => "user[email]").set opts[:user]
-@@browser.text_field(:name => "user[password]").set opts[:password]
+$browser.text_field(:name => "user[email]").set opts[:user]
+$browser.text_field(:name => "user[password]").set opts[:password]
 
-@@browser.form(:id => "new_user").submit
+$browser.form(:id => "new_user").submit
 
 if opts[:clear_cart]
     # Clear cart
@@ -80,6 +80,6 @@ end
 
 # Quit
 puts "Quitting browser..."
-@@browser.quit
+$browser.quit
 
 headless.destroy

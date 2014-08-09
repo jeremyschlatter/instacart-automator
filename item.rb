@@ -5,7 +5,7 @@ class Item < AttributeInitializable
 
   def add()
     puts "Adding item #{id}..."
-    @@browser.execute_script("InstacartStore.cart.addItem(#{id}, #{quantity})")
+    $browser.execute_script("InstacartStore.cart.addItem(#{id}, #{quantity})")
   end
 
   def self.add_items
